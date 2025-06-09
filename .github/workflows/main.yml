@@ -43,7 +43,7 @@ jobs:
         java-version: 21
         distribution: temurin
         
-    - name: Maven Clean Verify
+    - name: Maven Clean Verify ## Maven version available on ubuntu-latest. If you need another version - install separately.
       run: mvn clean verify
       
     - name: Docker Setup Buildx
