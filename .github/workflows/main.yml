@@ -36,41 +36,15 @@ jobs:
       run: |
           git tag ${{ steps.increment-version.outputs.version }}
           git push origin ${{ steps.increment-version.outputs.version }}
-
-    - name: Install Java and Maven
-      run: |
-          set -e  
-          sudo apt update
-          sudo apt install -y wget unzip tar
-
-          JDK_VERSION=21.0.4+7
-          JDK_DOWNLOAD_URL="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.4%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.4_7.tar.gz"
-          wget $JDK_DOWNLOAD_URL -O openjdk-21.tar.gz
-          sudo mkdir -p /opt/java
-          sudo tar -xzf openjdk-21.tar.gz -C /opt/java
           
-          sudo ln -sf /opt/java/jdk-21.0.4+7/bin/java /usr/bin/java
-          sudo ln -sf /opt/java/jdk-21.0.4+7/bin/javac /usr/bin/javac
-          
-          export JAVA_HOME=/opt/java/jdk-21.0.4+7
-          export PATH=$JAVA_HOME/bin:$PATH
-          
-          echo "Java version:"
-          java -version
-          echo "Javac version:"
-          javac -version
-          
-          MAVEN_VERSION=3.9.10
-          MAVEN_DOWNLOAD_URL="https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz"
-          wget $MAVEN_DOWNLOAD_URL -O apache-maven-$MAVEN_VERSION-bin.tar.gz
-          sudo tar -xvf apache-maven-$MAVEN_VERSION-bin.tar.gz -C /opt/
-          sudo ln -sf /opt/apache-maven-$MAVEN_VERSION/bin/mvn /usr/bin/mvn
-          
-          export M2_HOME=/opt/apache-maven-$MAVEN_VERSION
-          export PATH=$M2_HOME/bin:$PATH
-          
-          echo "Maven version:"
-          mvn -version
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.14.1
+      with:
+        java-version: 21
+        
+    - name: Maven Clean Verify
+      run: mvn clean verify
+      
     - name: Docker Setup Buildx
       uses: docker/setup-buildx-action@v3
       
