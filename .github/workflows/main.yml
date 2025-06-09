@@ -61,9 +61,9 @@ jobs:
           javac -version
           
           MAVEN_VERSION=3.9.10
-          MAVEN_DOWNLOAD_URL="https://downloads.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip"
-          wget $MAVEN_DOWNLOAD_URL -O apache-maven-$MAVEN_VERSION-bin.zip
-          sudo unzip apache-maven-$MAVEN_VERSION-bin.zip -d /opt/
+          MAVEN_DOWNLOAD_URL="https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz"
+          wget $MAVEN_DOWNLOAD_URL -O apache-maven-$MAVEN_VERSION-bin.tar.gz
+          sudo tar -xvf apache-maven-$MAVEN_VERSION-bin.tar.gz -C /opt/
           sudo ln -sf /opt/apache-maven-$MAVEN_VERSION/bin/mvn /usr/bin/mvn
           
           export M2_HOME=/opt/apache-maven-$MAVEN_VERSION
