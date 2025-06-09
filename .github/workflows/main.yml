@@ -52,5 +52,5 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          championsleague12/mvn:${{ steps.increment-version.outputs.version }}
-          championsleague12/mvn:latest
+          ${{ secrets.REPO_NAME }}/mvn:${{ steps.increment-version.outputs.version }}
+          ${{ secrets.REPO_NAME }}/mvn:latest
