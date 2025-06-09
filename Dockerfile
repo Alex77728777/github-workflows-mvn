@@ -8,3 +8,9 @@ RUN mkdir /working && chmod a+rw /working
 ADD . /working
 WORKDIR /working
 RUN mvn package -DskipTests
+
+FROM alpine/java:21.0.4-jre
+COPY --from=app-builder /working/target/*.jar /app/app.jar
+EXPOSE 8080
+ENTRYPOINT exec java -jar /app/app.jar
+
