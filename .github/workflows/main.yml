@@ -44,8 +44,10 @@ jobs:
         distribution: temurin
         
     - name: Maven Clean Verify ## Maven version available on ubuntu-latest. If you need another version - install separately.
-      run: mvn clean verify
-      
+      run: | 
+        mvn clean verify
+        mvn -version
+        
     - name: Docker Setup Buildx
       uses: docker/setup-buildx-action@v3
       
