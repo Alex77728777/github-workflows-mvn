@@ -41,6 +41,7 @@ jobs:
       uses: actions/setup-java@v3.14.1
       with:
         java-version: 21
+        distribution: temurin
         
     - name: Maven Clean Verify
       run: mvn clean verify
