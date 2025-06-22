@@ -65,3 +65,12 @@ jobs:
         tags: |
           ${{ secrets.REPO_NAME }}/mvn:${{ steps.increment-version.outputs.version }}
           ${{ secrets.REPO_NAME }}/mvn:latest
+    - name: Test Artifacts
+      run: |
+         mkdir artifacts
+         echo "Hello World" > artifacts/test.txt
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: text artifact
+        path: artifacts/test.txt
